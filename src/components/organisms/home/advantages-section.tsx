@@ -1,0 +1,264 @@
+"use client";
+
+import { Container } from "@components/atoms/container";
+import { Headline } from "@components/atoms/headline";
+import BlurText from "@components/atoms/text/blur-text";
+import { useGSAP } from "@gsap/react";
+import {
+  animateFloat,
+  cleanupFloatAnimation,
+} from "@shared/lib/helpers/animate-float";
+import { useRefArray } from "@shared/lib/refs";
+import { cn } from "@shared/lib/utils";
+import gsap from "gsap";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+const advantages = [
+  {
+    id: 1,
+    title: "Расположение в центральной части города",
+    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
+    image: "/assets/img/home/advantages/advantage-1.png",
+  },
+  {
+    id: 2,
+    title: "Сейсмостойкость здания – 9 баллов",
+    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
+    image: "/assets/img/home/advantages/advantage-2.png",
+  },
+  {
+    id: 3,
+    title: "Развитая инфраструктура",
+    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
+    image: "/assets/img/home/advantages/advantage-3.png",
+  },
+  {
+    id: 4,
+    title: "Высокий уровень сервиса",
+    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
+    image: "/assets/img/home/advantages/advantage-4.png",
+  },
+];
+
+function AdvantagesSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [elements, ref] = useRefArray<HTMLDivElement>();
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const { ref: inViewRef, inView } = useInView({ rootMargin: "20px" });
+
+  const t = useTranslations("home");
+
+  useGSAP(
+    () => {
+      if (!inView) return;
+
+      elements.current.forEach(el => {
+        const image = el.querySelector(".advantage-container");
+
+        gsap.set(image, { opacity: 0, x: 200, filter: "blur(10px)" });
+
+        const tl = gsap.timeline({
+          defaults: { ease: "circ.inOut" },
+          scrollTrigger: {
+            trigger: el,
+            start: "10% 80%",
+            end: "90% 30%",
+            scrub: 2,
+          },
+        });
+
+        tl.to(image, {
+          opacity: 1,
+          x: 0,
+          filter: "none",
+          duration: 0.6,
+        })
+          .to(image, {
+            // ничего не меняем — это "пауза"
+            opacity: 1,
+            x: 0,
+            filter: "none",
+            ease: "none",
+            duration: 1.5, // диапазон удержания
+          })
+          .to(image, {
+            opacity: 0,
+            x: 200,
+            filter: "blur(10px)",
+            duration: 0.6,
+          });
+      });
+    },
+    {
+      dependencies: [inView],
+      revertOnUpdate: true,
+    }
+  );
+
+  useEffect(() => {
+    if (!elements.current.length) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const index =
+            elements.current?.indexOf(entry.target as HTMLDivElement) ?? -1;
+
+          if (index !== -1) setActiveIndex(index);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    elements.current.forEach(el => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      elements.current.forEach(el => {
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, [setActiveIndex]);
+
+  useGSAP(
+    () => {
+      if (!inView) return;
+
+      gsap.from(".advantage-thesis", {
+        translateY: 200,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: "20% 60%",
+        },
+      });
+
+      const images = document.querySelectorAll(".advantage-figure");
+
+      const timelines = Array.from(images).map(i =>
+        animateFloat(i, { duration: [4, 6], intensity: [2, 2.5] })
+      );
+
+      return () => cleanupFloatAnimation(timelines);
+    },
+    { dependencies: [inView], revertOnUpdate: true }
+  );
+
+  return (
+    <section
+      ref={inViewRef}
+      className="advantages-section max-lg:pb-64 mt-64 overflow-clip relative"
+    >
+      <Container className="flex gap-6 mt-20 flex-col lg:flex-row">
+        <div className="basis-1/3">
+          <div className="wrapper lg:sticky lg:top-1/3 mt-24 mb-10">
+            <Headline
+              size={"lg"}
+              as="h2"
+              className="mb-4"
+            >
+              <BlurText
+                text={t("our-advantages")}
+                delay={150}
+                animateBy="words"
+                direction="bottom"
+              />
+            </Headline>
+            {advantages.map((item, index) => (
+              <button
+                type="button"
+                className="advantage-thesis min-h-12 w-full group cursor-pointer relative"
+                onClick={() => {
+                  elements.current[index].scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }}
+                key={item.id}
+              >
+                <div className="size-full flex items-center justify-between gap-4 pr-4">
+                  <Headline
+                    className="my-2"
+                    size={"semi-sm"}
+                    as="h3"
+                  >
+                    <span className="font-semibold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>{" "}
+                    {item.title}
+                  </Headline>
+
+                  <div
+                    className={cn(
+                      "size-2 rounded-full bg-white transition-all duration-300",
+                      "scale-0 group-hover:scale-100",
+                      { "lg:scale-100": activeIndex === index }
+                    )}
+                  />
+                </div>
+                <div
+                  className={cn(
+                    "aboslute inset-x-0 bottom-0 h-px bg-black/30",
+                    "w-full"
+                  )}
+                />
+
+                <div
+                  className={cn(
+                    "aboslute inset-x-0 bottom-0 h-px bg-white",
+                    "transition-all duration-300 w-0 group-hover:w-full",
+                    { "lg:w-full": activeIndex === index }
+                  )}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="basis-2/3 flex flex-col gap-36">
+          {advantages.map((item, index) => (
+            <div
+              className={cn(
+                "advantage-wrapper w-full py-20",
+                "grid place-items-center"
+              )}
+              key={index}
+              ref={ref}
+            >
+              <div className="advantage-container w-full grid place-items-center">
+                <figure className="advantage-figure relative w-10/12">
+                  <Image
+                    width={1080}
+                    height={608}
+                    src={item.image}
+                    alt={item.title}
+                    className="advantage-image rounded-md w-full h-auto"
+                  />
+
+                  <div className="glass-panel p-8 absolute top-[80%] left-0 md:-left-12 flex gap-4 items-center">
+                    <div className="text-8xl hidden md:block">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Headline as="h3">{item.title}</Headline>
+                      <p>{item.text}</p>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export default AdvantagesSection;

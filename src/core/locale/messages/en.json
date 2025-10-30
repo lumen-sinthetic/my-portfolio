@@ -1,0 +1,76 @@
+{
+  "common": {
+    "forms": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending...",
+      "enter-name": "Enter your name",
+      "enter-email": "Enter your email",
+      "enter-message": "Enter your message"
+    },
+    "ui": {
+      "learn-more": "Learn more",
+      "tech-characteristics": "Technical characteristics",
+      "menu": "menu",
+      "phone-number": "Phone number",
+      "personal-data": "personal data",
+      "copyright(year)": "© {year} Ken Dala - business center of class A",
+      "dev": {
+        "site-development": "Website development",
+        "web-studio": "Web studio"
+      }
+    }
+  },
+  "contacts": {
+    "send-application": "Send application",
+    "send-codition": "By clicking the \"Send\" button, you consent to the processing of",
+    "personal-data": "personal data",
+    "title": "Have questions?",
+    "subtitle": "Write to us"
+  },
+  "navigation": {
+    "home": "Home",
+    "business-center": "Business center",
+    "rent": "Rent",
+    "reviews": "Reviews",
+    "contacts": "Contacts"
+  },
+  "home": {
+    "a-class": "Class A business center",
+    "about": {
+      "title": "About the business center",
+      "floors": "floors",
+      "active-area": "usable area",
+      "additional-area": "auxiliary area",
+      "parking-places": "parking spaces"
+    },
+    "our-services": "Our services",
+    "our-advantages": "Our advantages",
+    "location": {
+      "title": "Convenient location",
+      "cta-text": "The business center is located in a promising area of the city with developed infrastructure. Government agencies and other important business facilities are within walking distance."
+    }
+  },
+  "data": {
+    "buildings": {
+      "building-1": {
+        "title": "Office spaces",
+        "description": "from 80 sq.m."
+      },
+      "building-2": {
+        "title": "Maxi offices",
+        "description": "from 125 to 200 sq.m."
+      },
+      "building-3": {
+        "title": "Mini offices",
+        "description": "from 1 to 6 workplaces"
+      },
+      "building-4": {
+        "title": "Conference halls",
+        "description": "up to 50 seats"
+      }
+    }
+  }
+}
