@@ -44,8 +44,7 @@ export default {
 			colors: {
 				"text-primary": "var(--text-primary)",
 				primary: {
-					// DEFAULT: "hsl(var(--primary))",
-					DEFAULT: "#585C3B",
+					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
 				},
 				background: "hsl(var(--background))",

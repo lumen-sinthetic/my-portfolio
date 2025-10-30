@@ -2,38 +2,18 @@
 
 import { Container } from "@components/atoms/container";
 import { Headline } from "@components/atoms/headline";
-import BlurText from "@components/atoms/text/blur-text";
-import CountUp from "@components/atoms/text/count-up";
 import { useGSAP } from "@gsap/react";
+import { aboutInfo } from "@shared/data/about-me";
 import {
   animateFloat,
   cleanupFloatAnimation,
 } from "@shared/lib/helpers/animate-float";
 import { cn } from "@shared/lib/utils";
 import { gsap } from "gsap";
-import { useTranslations } from "next-intl";
-import { useMemo, useRef } from "react";
-
-interface Measurement {
-  number: number;
-  unit?: string;
-  name: string;
-}
+import { useRef } from "react";
 
 function AboutSection() {
   const triggerRef = useRef<HTMLDivElement>(null);
-
-  const t = useTranslations("home.about");
-
-  const measurements: Measurement[] = useMemo(
-    () => [
-      { number: 9, name: t("floors") },
-      { number: 15500, unit: "м²", name: t("active-area") },
-      { number: 150, name: t("parking-places") },
-      { number: 3640, unit: "м²", name: t("additional-area") },
-    ],
-    [t]
-  );
 
   useGSAP(
     () => {
@@ -76,47 +56,33 @@ function AboutSection() {
       ref={triggerRef}
       className="about-section overflow-clip relative"
     >
-      <Container className="flex items-center py-64 flex-col">
-        <Headline
-          size={"2xl"}
-          className="block w-fit"
-        >
-          <BlurText
-            text={t("title")}
-            delay={150}
-            animateBy="words"
-            direction="bottom"
-          />
-        </Headline>
-
-        <div className="grid md:grid-cols-2 place-items-center gap-10 xl:flex xl:justify-between w-full mt-20">
-          {measurements.map((item, index) => (
+      <Container className="flex items-center py-32 flex-col">
+        <div className="grid md:grid-cols-2 place-items-center gap-10 w-full mt-20">
+          {aboutInfo.map((item, index) => (
             <div
-              className="fact-figure w-full xl:w-auto"
               key={index}
+              className="fact-figure w-full xl:w-auto"
             >
               <div
                 className={cn(
-                  "fact-card glass-panel flex items-center flex-col justify-center",
-                  "px-12 py-8 text-center items-center gap-6"
+                  "fact-card glass-panel flex flex-col justify-center",
+                  "px-12 py-8 text-left gap-6"
                 )}
-                key={index}
               >
                 <Headline
-                  size={"xl"}
+                  size={"lg"}
                   as="h3"
+                  className="font-medium"
                 >
-                  <CountUp
-                    from={0}
-                    to={item.number}
-                    direction="up"
-                    separator=" "
-                    duration={0.2}
-                  />{" "}
-                  {item.unit}
+                  {item.title}
                 </Headline>
 
-                <Headline as="h4">{item.name}</Headline>
+                <Headline
+                  asChild
+                  size={"semi-sm"}
+                >
+                  {item.content}
+                </Headline>
               </div>
             </div>
           ))}
