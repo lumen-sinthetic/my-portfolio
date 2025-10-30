@@ -51,12 +51,11 @@ function PortfolioSection() {
           duration: 0.6,
         })
           .to(image, {
-            // ничего не меняем — это "пауза"
             opacity: 1,
             x: 0,
             filter: "none",
             ease: "none",
-            duration: 1.5, // диапазон удержания
+            duration: 1.5,
           })
           .to(image, {
             opacity: 0,
@@ -234,7 +233,7 @@ function PortfolioSection() {
                         </Link>
                       </Headline>
                       {item.description && <p>{item.description}</p>}
-                      {item.tags && (
+                      {!!item.tags?.length && (
                         <div className="flex gap-3">
                           {item.tags.map((tag, index) => (
                             <Badge key={index}>{tag}</Badge>

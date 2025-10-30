@@ -12,6 +12,8 @@ function LangSwitcher() {
   const router = useRouter();
   const { headerState } = useUIContext();
 
+  if (locales.length < 2) return;
+
   return (
     <div className="flex gap-2">
       {locales.map((locale, index) => (

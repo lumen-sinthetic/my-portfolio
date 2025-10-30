@@ -13,10 +13,11 @@ export default function Home() {
 
       <HeroSection />
       <AboutSection />
-      {/* <BuildingsSection /> */}
       <PortfolioSection />
 
       <AnotherBg>
+        {/* Experience section */}
+        {/* Contacts abd CTA section / footer */}
         <CtaLocationSection />
         <ContactsSection />
       </AnotherBg>
