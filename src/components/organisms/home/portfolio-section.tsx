@@ -1,9 +1,11 @@
 "use client";
 
+import { Badge } from "@components/atoms/badge";
 import { Container } from "@components/atoms/container";
 import { Headline } from "@components/atoms/headline";
 import BlurText from "@components/atoms/text/blur-text";
 import { useGSAP } from "@gsap/react";
+import { portfolio } from "@shared/data/portfolio";
 import {
   animateFloat,
   cleanupFloatAnimation,
@@ -11,45 +13,17 @@ import {
 import { useRefArray } from "@shared/lib/refs";
 import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
-import { useTranslations } from "next-intl";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-const advantages = [
-  {
-    id: 1,
-    title: "Расположение в центральной части города",
-    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
-    image: "/assets/img/home/advantages/advantage-1.png",
-  },
-  {
-    id: 2,
-    title: "Сейсмостойкость здания – 9 баллов",
-    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
-    image: "/assets/img/home/advantages/advantage-2.png",
-  },
-  {
-    id: 3,
-    title: "Развитая инфраструктура",
-    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
-    image: "/assets/img/home/advantages/advantage-3.png",
-  },
-  {
-    id: 4,
-    title: "Высокий уровень сервиса",
-    text: "Бизнес-центр находится в деловом центре города: государственные органы и основные объекты расположены в шаговой доступности.",
-    image: "/assets/img/home/advantages/advantage-4.png",
-  },
-];
-
-function AdvantagesSection() {
+function PortfolioSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [elements, ref] = useRefArray<HTMLDivElement>();
   const triggerRef = useRef<HTMLDivElement>(null);
   const { ref: inViewRef, inView } = useInView({ rootMargin: "20px" });
-
-  const t = useTranslations("home");
 
   useGSAP(
     () => {
@@ -154,7 +128,7 @@ function AdvantagesSection() {
   return (
     <section
       ref={inViewRef}
-      className="advantages-section max-lg:pb-64 mt-64 overflow-clip relative"
+      className="advantages-section py-64 overflow-clip relative"
     >
       <Container className="flex gap-6 mt-20 flex-col lg:flex-row">
         <div className="basis-1/3">
@@ -165,13 +139,13 @@ function AdvantagesSection() {
               className="mb-4"
             >
               <BlurText
-                text={t("our-advantages")}
+                text={"Портфолио"}
                 delay={150}
                 animateBy="words"
                 direction="bottom"
               />
             </Headline>
-            {advantages.map((item, index) => (
+            {portfolio.map((item, index) => (
               <button
                 type="button"
                 className="advantage-thesis min-h-12 w-full group cursor-pointer relative"
@@ -181,7 +155,7 @@ function AdvantagesSection() {
                     block: "center",
                   });
                 }}
-                key={item.id}
+                key={index}
               >
                 <div className="size-full flex items-center justify-between gap-4 pr-4">
                   <Headline
@@ -192,7 +166,7 @@ function AdvantagesSection() {
                     <span className="font-semibold">
                       {String(index + 1).padStart(2, "0")}
                     </span>{" "}
-                    {item.title}
+                    {item.name}
                   </Headline>
 
                   <div
@@ -223,7 +197,7 @@ function AdvantagesSection() {
         </div>
 
         <div className="basis-2/3 flex flex-col gap-36">
-          {advantages.map((item, index) => (
+          {portfolio.map((item, index) => (
             <div
               className={cn(
                 "advantage-wrapper w-full py-20",
@@ -233,22 +207,40 @@ function AdvantagesSection() {
               ref={ref}
             >
               <div className="advantage-container w-full grid place-items-center">
-                <figure className="advantage-figure relative w-10/12">
+                <figure className="advantage-figure relative steady-hover w-10/12">
                   <Image
                     width={1080}
                     height={608}
                     src={item.image}
-                    alt={item.title}
+                    alt={item.name}
                     className="advantage-image rounded-md w-full h-auto"
                   />
 
-                  <div className="glass-panel p-8 absolute top-[80%] left-0 md:-left-12 flex gap-4 items-center">
+                  <div className="glass-panel !bg-black/40 p-8 absolute top-[80%] left-0 md:-left-12 flex gap-4 items-center">
                     <div className="text-8xl hidden md:block">
                       {String(index + 1).padStart(2, "0")}
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <Headline as="h3">{item.title}</Headline>
-                      <p>{item.text}</p>
+                    <div className="flex flex-col gap-3">
+                      <Headline asChild>
+                        <Link
+                          href={item.link}
+                          rel="noindex nofollow"
+                          target="_blank"
+                          className="flex gap-2"
+                        >
+                          {item.name}
+
+                          <ArrowUpRight />
+                        </Link>
+                      </Headline>
+                      {item.description && <p>{item.description}</p>}
+                      {item.tags && (
+                        <div className="flex gap-3">
+                          {item.tags.map((tag, index) => (
+                            <Badge key={index}>{tag}</Badge>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </figure>
@@ -261,4 +253,4 @@ function AdvantagesSection() {
   );
 }
 
-export default AdvantagesSection;
+export default PortfolioSection;
