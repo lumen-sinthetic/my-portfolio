@@ -32,10 +32,10 @@ function HerroSection() {
         Привет, я
       </Headline>
       <Container className="min-h-screen select-none">
-        <div className="flex justify-center gap-12 flex-col text-[15rem] font-bold w-full min-h-screen">
-          <div className="initial-text">Вадим</div>
+        <h1 className="flex justify-center gap-12 flex-col text-[15rem] font-bold w-full min-h-screen">
+          <div className="initial-text">Вадим</div>{" "}
           <div className="initial-text text-right">Сикорский</div>
-        </div>
+        </h1>
       </Container>
 
       <Headline className="absolute bottom-4 left-1/2 -translate-x-1/2 select-none">
