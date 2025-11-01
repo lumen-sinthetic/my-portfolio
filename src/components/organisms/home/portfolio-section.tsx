@@ -1,9 +1,10 @@
 "use client";
 
-import { Badge } from "@components/atoms/badge";
 import { Container } from "@components/atoms/container";
 import { Headline } from "@components/atoms/headline";
 import BlurText from "@components/atoms/text/blur-text";
+import { PortfolioCard } from "@components/molecules/portfolio/portfolio-card";
+import PortfolioParagraph from "@components/molecules/portfolio/portfolio-paragraph";
 import { useGSAP } from "@gsap/react";
 import { portfolio } from "@shared/data/portfolio";
 import {
@@ -11,11 +12,7 @@ import {
   cleanupFloatAnimation,
 } from "@shared/lib/helpers/animate-float";
 import { useRefArray } from "@shared/lib/refs";
-import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -145,106 +142,30 @@ function PortfolioSection() {
               />
             </Headline>
             {portfolio.map((item, index) => (
-              <button
-                type="button"
-                className="advantage-thesis min-h-12 w-full group cursor-pointer relative"
+              <PortfolioParagraph
+                key={index}
+                index={index}
+                activeIndex={activeIndex}
+                title={item.name}
                 onClick={() => {
                   elements.current[index].scrollIntoView({
                     behavior: "smooth",
                     block: "center",
                   });
                 }}
-                key={index}
-              >
-                <div className="size-full flex items-center justify-between gap-4 pr-4">
-                  <Headline
-                    className="my-2"
-                    size={"semi-sm"}
-                    as="h3"
-                  >
-                    <span className="font-semibold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>{" "}
-                    {item.name}
-                  </Headline>
-
-                  <div
-                    className={cn(
-                      "size-2 rounded-full bg-white transition-all duration-300",
-                      "scale-0 group-hover:scale-100",
-                      { "lg:scale-100": activeIndex === index }
-                    )}
-                  />
-                </div>
-                <div
-                  className={cn(
-                    "aboslute inset-x-0 bottom-0 h-px bg-black/30",
-                    "w-full"
-                  )}
-                />
-
-                <div
-                  className={cn(
-                    "aboslute inset-x-0 bottom-0 h-px bg-white",
-                    "transition-all duration-300 w-0 group-hover:w-full",
-                    { "lg:w-full": activeIndex === index }
-                  )}
-                />
-              </button>
+              />
             ))}
           </div>
         </div>
 
         <div className="basis-2/3 flex flex-col gap-36">
           {portfolio.map((item, index) => (
-            <div
-              className={cn(
-                "advantage-wrapper w-full py-20",
-                "grid place-items-center"
-              )}
+            <PortfolioCard
               key={index}
               ref={ref}
-            >
-              <div className="advantage-container w-full grid place-items-center">
-                <figure className="advantage-figure relative steady-hover w-10/12">
-                  <Image
-                    width={1080}
-                    height={608}
-                    src={item.image}
-                    alt={item.name}
-                    className="advantage-image rounded-md w-full h-auto"
-                  />
-
-                  <div className="glass-panel !bg-black/40 p-8 absolute top-[80%] left-0 md:-left-12 flex gap-4 items-center">
-                    <div className="text-8xl hidden md:block">
-                      {String(index + 1).padStart(2, "0")}
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      <Headline asChild>
-                        <Link
-                          href={item.link}
-                          rel="noindex nofollow"
-                          target="_blank"
-                          className="flex gap-2"
-                        >
-                          {item.name}
-
-                          <ArrowUpRight />
-                        </Link>
-                      </Headline>
-                      {item.description && <p>{item.description}</p>}
-                      {!!item.tags?.length && (
-                        <div className="flex gap-3">
-                          {item.tags.map((tag, index) => (
-                            <Badge key={index}>{tag}</Badge>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
+              data={item}
+              order={index + 1}
+            />
           ))}
         </div>
       </Container>
