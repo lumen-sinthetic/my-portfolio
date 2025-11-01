@@ -1,7 +1,5 @@
 import PageProgress from "@components/atoms/page-progress";
 import Anchor from "@components/molecules/anchor";
-import Footer from "@components/templates/layout/footer";
-import Header from "@components/templates/layout/header";
 import IntlProvider from "@core/context/IntlProvider";
 import { LenisProvider } from "@core/context/LenisProvider";
 import { UIProvider } from "@core/context/ui-provider";
@@ -63,12 +61,12 @@ async function RootLayout({ children, params }: Readonly<RootLayoutProps>) {
         >
           <LenisProvider>
             <UIProvider>
-              <Header />
+              {/* <Header /> */}
               {children}
               <PageProgress />
               <Anchor />
 
-              <Footer currentDate={new Date()} />
+              {/* <Footer currentDate={new Date()} /> */}
             </UIProvider>
           </LenisProvider>
         </IntlProvider>

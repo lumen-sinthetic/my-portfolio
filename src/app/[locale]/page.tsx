@@ -1,6 +1,6 @@
 import ContactsSection from "@components/organisms/contacts-section";
 import AboutSection from "@components/organisms/home/about-section";
-import CtaLocationSection from "@components/organisms/home/cta-location-section";
+import ExperienceSection from "@components/organisms/home/experience-section";
 import HeroSection from "@components/organisms/home/hero-section";
 import PortfolioSection from "@components/organisms/home/portfolio-section";
 import AnotherBg from "@components/organisms/layout/another-bg";
@@ -18,7 +18,7 @@ export default function Home() {
       <AnotherBg>
         {/* Experience section */}
         {/* Contacts abd CTA section / footer */}
-        <CtaLocationSection />
+        <ExperienceSection />
         <ContactsSection />
       </AnotherBg>
     </main>

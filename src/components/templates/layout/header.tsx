@@ -1,15 +1,12 @@
 "use client";
 
 import { Container } from "@components/atoms/container";
-import LogoFigure from "@components/atoms/icons/logo-figure";
 import BurgerBtn from "@components/molecules/burger/burger-btn";
 import BurgerMenu from "@components/molecules/burger/burger-menu";
 import LangSwitcher from "@components/molecules/lang-switcher";
-import Logo from "@components/molecules/logo";
 import { useUIContext } from "@core/context/ui-provider";
 import { useScrollTreshold } from "@shared/lib/helpers/use-scroll-handle";
 import { cn } from "@shared/lib/utils";
-import Link from "next/link";
 import { useState } from "react";
 
 function Header() {
@@ -45,7 +42,7 @@ function Header() {
           )}
         />
 
-        <Link href={"/#home-hero"}>
+        {/* <Link href={"/#home-hero"}>
           <Logo
             logoColor={
               headerState === "white" || isMenuOpen ? "white" : "black"
@@ -73,7 +70,7 @@ function Header() {
               "sm:hidden"
             )}
           />
-        </Link>
+        </Link> */}
       </header>
       <BurgerMenu
         isOpen={isMenuOpen}
