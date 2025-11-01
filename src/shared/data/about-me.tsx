@@ -1,13 +1,13 @@
 import { Badge } from "@components/atoms/badge";
-import MuiIcon from "@components/atoms/icons/mui-icon";
-import NextIcon from "@components/atoms/icons/next-icon";
-import NuxtIcon from "@components/atoms/icons/nuxt-icon";
-import ReactIcon from "@components/atoms/icons/react-icon";
-import ScssIcon from "@components/atoms/icons/scss-icon";
-import ShadcnIcon from "@components/atoms/icons/shadcn-logo";
-import TailwindIcon from "@components/atoms/icons/tailwind-icon";
-import TypescriptIcon from "@components/atoms/icons/typescript-icon";
-import VueIcon from "@components/atoms/icons/vue-icon";
+import MuiIcon from "@components/atoms/icons/stack/mui-icon";
+import NextIcon from "@components/atoms/icons/stack/next-icon";
+import NuxtIcon from "@components/atoms/icons/stack/nuxt-icon";
+import ReactIcon from "@components/atoms/icons/stack/react-icon";
+import ScssIcon from "@components/atoms/icons/stack/scss-icon";
+import ShadcnIcon from "@components/atoms/icons/stack/shadcn-logo";
+import TailwindIcon from "@components/atoms/icons/stack/tailwind-icon";
+import TypescriptIcon from "@components/atoms/icons/stack/typescript-icon";
+import VueIcon from "@components/atoms/icons/stack/vue-icon";
 import { ComponentProps, FC, ReactNode } from "react";
 
 export const stack: Array<{
@@ -16,22 +16,10 @@ export const stack: Array<{
   new?: boolean;
 }> = [
   { name: "Typescript", icon: TypescriptIcon },
-  {
-    name: "React",
-    icon: ReactIcon,
-  },
-  {
-    name: "Next.js",
-    icon: NextIcon,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: TailwindIcon,
-  },
-  {
-    name: "SCSS",
-    icon: ScssIcon,
-  },
+  { name: "React", icon: ReactIcon },
+  { name: "Next.js", icon: NextIcon },
+  { name: "Tailwind CSS", icon: TailwindIcon },
+  { name: "SCSS", icon: ScssIcon },
   { name: "MUI", icon: MuiIcon },
   { name: "Shadcn", icon: ShadcnIcon },
   { name: "Vue", icon: VueIcon, new: true },

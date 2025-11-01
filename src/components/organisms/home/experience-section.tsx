@@ -35,7 +35,7 @@ function ExperienceSection() {
   return (
     <section
       ref={triggerRef}
-      className="cta-location-section overflow-clip relative py-32"
+      className="cta-location-section overflow-clip relative pt-32 pb-16"
     >
       <Container>
         <Headline
@@ -50,7 +50,7 @@ function ExperienceSection() {
           />
         </Headline>
 
-        <div className="list mt-32 grid grid-cols-2">
+        <div className="list mt-16 grid grid-cols-2">
           {experience.map((item, index) => (
             <div
               key={index}
