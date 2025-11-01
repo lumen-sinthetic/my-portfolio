@@ -29,6 +29,7 @@ export default {
 			},
 
 			screens: {
+				"2xs": "300px",
 				xs: "400px",
 				"3xl": "1600px"
 			},

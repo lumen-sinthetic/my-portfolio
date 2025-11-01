@@ -27,7 +27,7 @@ function PortfolioSection() {
       if (!inView) return;
 
       elements.current.forEach(el => {
-        const image = el.querySelector(".advantage-container");
+        const image = el.querySelector(".portfolio-container");
 
         gsap.set(image, { opacity: 0, x: 200, filter: "blur(10px)" });
 
@@ -99,7 +99,7 @@ function PortfolioSection() {
     () => {
       if (!inView) return;
 
-      gsap.from(".advantage-thesis", {
+      gsap.from(".portfolio-thesis", {
         translateY: 200,
         opacity: 0,
         duration: 0.5,
@@ -110,7 +110,7 @@ function PortfolioSection() {
         },
       });
 
-      const images = document.querySelectorAll(".advantage-figure");
+      const images = document.querySelectorAll(".portfolio-figure");
 
       const timelines = Array.from(images).map(i =>
         animateFloat(i, { duration: [4, 6], intensity: [2, 2.5] })
@@ -124,11 +124,11 @@ function PortfolioSection() {
   return (
     <section
       ref={inViewRef}
-      className="advantages-section py-64 overflow-clip relative"
+      className="portfolio-section py-24 overflow-clip relative"
     >
-      <Container className="flex gap-6 mt-20 flex-col lg:flex-row">
-        <div className="basis-1/3">
-          <div className="wrapper lg:sticky lg:top-1/3 mt-24 mb-10">
+      <Container className="flex gap-6 mt-20 flex-col xl:flex-row">
+        <div className="xl:basis-1/3">
+          <div className="wrapper xl:sticky xl:top-1/3 mt-24 mb-10">
             <Headline
               size={"lg"}
               as="h2"
@@ -158,7 +158,7 @@ function PortfolioSection() {
           </div>
         </div>
 
-        <div className="basis-2/3 flex flex-col gap-36">
+        <div className="xl:basis-2/3 flex flex-col gap-36">
           {portfolio.map((item, index) => (
             <PortfolioCard
               key={index}

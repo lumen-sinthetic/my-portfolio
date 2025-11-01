@@ -17,19 +17,19 @@ const PortfolioCard = forwardRef<HTMLDivElement, PortfolioCardProps>(
     return (
       <div
         className={cn(
-          "advantage-wrapper w-full py-20",
+          "portfolio-wrapper w-full py-20",
           "grid place-items-center"
         )}
         ref={ref}
       >
-        <div className="advantage-container w-full grid place-items-center">
-          <figure className="advantage-figure relative steady-hover w-10/12">
+        <div className="portfolio-container w-full grid place-items-center">
+          <figure className="portfolio-figure relative steady-hover w-full md:w-10/12">
             <Image
               width={1080}
               height={608}
               src={data.image}
               alt={data.name}
-              className="advantage-image rounded-md w-full h-auto"
+              className="portfolio-image rounded-md w-full h-auto"
             />
 
             <div className="glass-panel !bg-black/40 p-8 absolute top-[80%] left-0 md:-left-12 flex gap-4 items-center">

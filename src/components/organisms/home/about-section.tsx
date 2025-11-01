@@ -11,9 +11,11 @@ import {
 import { cn } from "@shared/lib/utils";
 import { gsap } from "gsap";
 import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 function AboutSection() {
   const triggerRef = useRef<HTMLDivElement>(null);
+  const isLargeScreen = useMediaQuery({ minWidth: 500 });
 
   useGSAP(
     () => {
@@ -40,16 +42,16 @@ function AboutSection() {
   );
 
   useGSAP(() => {
-    if (!triggerRef.current) return;
+    if (!triggerRef.current || !isLargeScreen) return;
 
     const elements = triggerRef.current.querySelectorAll(".fact-card");
 
     const timelines = Array.from(elements).map(i =>
-      animateFloat(i, { duration: [4, 8], intensity: [2, 2.5] })
+      animateFloat(i, { duration: [6, 8], intensity: [1, 1.5] })
     );
 
     return () => cleanupFloatAnimation(timelines);
-  }, []);
+  }, [isLargeScreen]);
 
   return (
     <section
@@ -57,7 +59,7 @@ function AboutSection() {
       className="about-section overflow-clip relative"
     >
       <Container className="flex items-center py-32 flex-col">
-        <div className="grid md:grid-cols-2 place-items-center gap-10 w-full mt-20">
+        <div className="grid 2xl:grid-cols-2 place-items-center gap-12 w-full mt-20">
           {aboutInfo.map((item, index) => (
             <div
               key={index}
@@ -66,7 +68,7 @@ function AboutSection() {
               <div
                 className={cn(
                   "fact-card glass-panel flex flex-col justify-center",
-                  "px-12 py-8 text-left gap-6"
+                  "p-4 md:px-12 md:py-8 text-left gap-6"
                 )}
               >
                 <Headline

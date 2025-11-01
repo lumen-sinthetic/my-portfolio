@@ -58,13 +58,13 @@ export const aboutInfo: Array<{ title: string; content: ReactNode }> = [
   {
     title: "Стек технологий",
     content: (
-      <ul className="grid grid-cols-3 gap-4">
+      <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {stack.map((item, index) => (
           <li
             className="flex gap-2"
             key={index}
           >
-            <item.icon className="fill-white size-8" /> - {item.name}
+            <item.icon className="fill-white size-8 shrink-0" /> - {item.name}
             {item.new && <Badge variant={"secondary"}>New</Badge>}
           </li>
         ))}

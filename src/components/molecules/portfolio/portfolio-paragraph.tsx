@@ -18,7 +18,7 @@ function PortfolioParagraph({
   return (
     <button
       type="button"
-      className="advantage-thesis min-h-12 w-full group cursor-pointer relative"
+      className="portfolio-thesis min-h-12 w-full group cursor-pointer relative"
       onClick={onClick}
     >
       <div className="size-full flex items-center justify-between gap-4 pr-4">
@@ -41,15 +41,12 @@ function PortfolioParagraph({
           )}
         />
       </div>
-      <div
-        className={cn("aboslute inset-x-0 bottom-0 h-px bg-black/30", "w-full")}
-      />
 
       <div
         className={cn(
           "aboslute inset-x-0 bottom-0 h-px bg-white",
           "transition-all duration-300 w-0 group-hover:w-full",
-          { "lg:w-full": activeIndex === index }
+          { "xl:w-full": activeIndex === index }
         )}
       />
     </button>

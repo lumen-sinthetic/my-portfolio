@@ -9,13 +9,13 @@ const headlineSizes = cva("", {
   variants: {
     size: {
       none: "",
-      xs: "text-xxs lg:text-xs",
       sm: "text-base sm:text-lg 3xl:text-xl",
-      "semi-sm": "text-xl 2xl:text-2xl",
-      md: "text-2xl sm:text-3xl 2xl:text-4xl",
-      lg: "text-3xl sm:text-4xl md:text-5xl",
-      xl: "text-4xl sm:text-5xl 2xl:text-6xl 3xl:text-7xl",
-      "2xl": "text-5xl sm:text-7xl 2xl:text-8xl",
+      "semi-sm": "text-lg xs:text-xl 2xl:text-2xl",
+      md: "text-xl xs:text-2xl sm:text-3xl 2xl:text-4xl",
+      lg: "text-2xl xs:text-3xl sm:text-4xl md:text-5xl",
+      xl: "text-3xl xs:text-4xl sm:text-5xl 2xl:text-6xl 3xl:text-7xl",
+      "2xl": "text-4xl xs:text-5xl sm:text-7xl 2xl:text-8xl",
+      "3xl": "text-4xl 2xs:text-5xl xs:text-6xl lg:text-9xl 2xl:text-[15rem]",
     },
   },
   defaultVariants: {

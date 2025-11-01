@@ -20,11 +20,12 @@ function Anchor() {
       className={cn(
         "top-anchor glass-panel",
         "fixed bottom-10 right-10 z-50 size-12",
-        "grid place-items-center transition-all duration-300",
+        "place-items-center transition-all duration-300",
         {
           "translate-y-20 opacity-0": !isScrolled,
           "text-black border": headerState === "black",
-        }
+        },
+        "hidden md:grid"
       )}
       onClick={() => lenis?.scrollTo(0)}
     >

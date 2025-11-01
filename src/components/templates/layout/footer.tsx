@@ -5,7 +5,7 @@ import Link from "next/link";
 function Footer({ date }: { date: Date }) {
   return (
     <footer className="py-8">
-      <Container className="flex justify-between">
+      <Container className="flex justify-between md:flex-row gap-8 flex-col items-center">
         <div className="socials flex gap-8">
           {socials.map((item, index) => (
             <Link
@@ -19,7 +19,7 @@ function Footer({ date }: { date: Date }) {
           ))}
         </div>
 
-        <div className="font-medium text-right mr-10">
+        <div className="font-medium text-right md:mr-10 max-md:text-center">
           Сделано с ❤️ на базе Next.js и Tailwind CSS <br />©{" "}
           {date.getFullYear()}
         </div>
