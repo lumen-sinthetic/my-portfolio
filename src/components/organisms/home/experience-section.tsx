@@ -10,19 +10,28 @@ import {
   animateFloat,
   cleanupFloatAnimation,
 } from "@shared/lib/helpers/animate-float";
+import { refs } from "@shared/lib/refs";
 import { format, formatDistanceStrict } from "date-fns";
 import { ru } from "date-fns/locale";
 import gsap from "gsap";
 import Image from "next/image";
 import { useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import { useMediaQuery } from "react-responsive";
 
 function ExperienceSection() {
   const triggerRef = useRef<HTMLDivElement>(null);
   const isLargeScreen = useMediaQuery({ minWidth: 500 });
 
+  const { ref, inView } = useInView({
+    rootMargin: "20px",
+    triggerOnce: true,
+  });
+
   useGSAP(
     () => {
+      if (!triggerRef.current || !inView) return;
+
       gsap.fromTo(
         ".experience-wrapper",
         { opacity: 0, translateX: 200 },
@@ -33,13 +42,13 @@ function ExperienceSection() {
           duration: 0.8,
           scrollTrigger: {
             trigger: triggerRef.current,
-            start: "20% 60%",
+            start: "20% 50%",
           },
         }
       );
     },
     {
-      dependencies: [],
+      dependencies: [inView],
       revertOnUpdate: true,
       scope: triggerRef,
     }
@@ -61,7 +70,7 @@ function ExperienceSection() {
 
   return (
     <section
-      ref={triggerRef}
+      ref={refs(triggerRef, ref)}
       className="experience-section overflow-clip relative pt-32 pb-16"
     >
       <Container>

@@ -82,7 +82,7 @@ async function RootLayout({ children, params }: Readonly<RootLayoutProps>) {
         suppressHydrationWarning
         className={cn(
           inter.className,
-          "text-white font-light antialiased text-base"
+          "text-white font-light antialiased text-base overflow-hidden"
         )}
       >
         <IntlProvider
